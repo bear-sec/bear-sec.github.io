@@ -9,7 +9,7 @@ name: Security Bear
 description: Security Bear
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://github.com/bear-sec/bear-sec.github.io/blob/master/images/bear.jpg
+avatar: https://github.com/bear-sec/bear-sec.github.io/raw/master/images/bear.jpg
 
 #
 # Flags below are optional
