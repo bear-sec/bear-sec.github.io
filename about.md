@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+Security researcher, love to share the knowldge, and solve problems.
+For any question regarding any of the posts feel free to send me an e-mail.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[bear-sec0@gmail.com](mailto:bear-sec0@gmail.com)
