@@ -19,6 +19,7 @@ Can you unzip this file for me and retreive the flag?
 ## Solution
 
 The supplied file is a zip archive, and by just opening the archive we find a picture that has the flag, we can submit it.
+
 ![zeep](https://bear-sec.github.io/images/forensics-warmup_1.JPG)
 
 ----
@@ -37,6 +38,7 @@ Hmm for some reason I can't open this PNG? Any ideas?
 ## Solution
 
 We get a png file that as the challenge says we cant open, I guess it wasnt supposed to have an extension and we needed to check the file type, but it was a .png file.
+
 ![pengee](https://bear-sec.github.io/images/forensics-warmup_2.png)
 
 ----
@@ -98,6 +100,28 @@ We can also see that plane 1 is proper static noise (this happens at all colors)
 Now we extract 0 plane from all the planes, and get the ascii string of the flag:
 
 ![flag](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-reading_4.PNG)
+
+----
+
+# Recovering From the Snap
+
+There used to be a bunch of animals [here](https://github.com/bear-sec/pico2018/blob/master/Forensics/5%20-%20Recovering%20From%20the%20Snap/animals.dd?raw=true), what did Dr. Xernon do to them?
+
+<details>
+  <summary>Hints</summary>
+  
+    1. Some files have been deleted from the disk image, but are they really gone?
+</details>
+
+## Solutions
+
+We are presented with a .dd file. The challenge also says that there are a bunch of animals, maybe pictures? so we use foremost to carve out image file types. 
+
+![scalp](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-recover_1.JPG)
+
+and we find a folder of jpg's with some animals, and in this folder a picture of a flag.
+
+![scalp](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-recover_2.JPG)
 
 ----
 
