@@ -87,11 +87,16 @@ Stego-Saurus hid a message for you in [this image](https://github.com/bear-sec/p
 
 in this challenge we get an image and not much data besides that. its said that theres a message hidden in the image, so the first thing to do is try and see if we can easily see something odd in the image layers. Ive chose to use my favorite tool for steganography, which is stegsolve.
 we can right away see that in each color, the 0 bit plane has some data in the beginning and then its 0.
+
 ![green](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-reading_1.PNG)
 ![blue](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-reading_2.PNG)
+
 We can also see that plane 1 is proper static noise (this happens at all colors)
+
 ![noise](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-reading_3.PNG)
+
 Now we extract 0 plane from all the planes, and get the ascii string of the flag:
+
 ![flag](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-reading_4.PNG)
 
 ----
