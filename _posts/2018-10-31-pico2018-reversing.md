@@ -58,7 +58,7 @@ What does asm0(0xaa,0xf2) return? Submit the flag as a hexadecimal value (starti
 
 Following the assembly and the arguments passed specified in the question:
 
-```assembly
+```assembly_x86
 .intel_syntax noprefix
 .bits 32
 	
