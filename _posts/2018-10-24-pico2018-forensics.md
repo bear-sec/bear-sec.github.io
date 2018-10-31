@@ -127,7 +127,7 @@ and we find a folder of jpg's with some animals, and in this folder a picture of
 
 # Admin Panel
 
-We captured some traffic logging into the admin panel, can you find the password?
+We captured [some traffic](https://github.com/bear-sec/pico2018/blob/master/Forensics/6%20-%20admin%20panel/data.pcap?raw=true) logging into the admin panel, can you find the password?
 <details>
   <summary>Hints</summary>
   
@@ -145,4 +145,108 @@ and then theres another login with the admin user, and the password is the forma
 ![cool user](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-admin_2.JPG)
 
 ----
+
+# Hex Editor
+
+[This cat](https://github.com/bear-sec/pico2018/raw/master/Forensics/7%20-%20hex%20editor/hex_editor.jpg) has a secret to teach you. You can also find the file in /problems/hex-editor_4_0a7282b29fa47d68c3e2917a5a0d726b on the shell server.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. What is a hex editor? Maybe google knows.
+        <a href="https://linux.die.net/man/1/xxd">xxd</a><br>
+        <a href="https://linux.die.net/man/1/hexedit">hexedit</a><br>
+        <a href="https://linux.die.net/man/1/bvi>bvi</a><br>
+</details>
+
+## Solution
+
+In this challenge we get another image file and we need to find the secret. since the challenges name is hex-editor, i opened the image file in my favorite hex editod, and searched for pico, and found the flag in the raw bytes.
+
+![pico](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-hex_1.PNG)
+
+----
+
+# Truly and Artist
+
+Can you help us find the flag in this [Meta-Material](https://github.com/bear-sec/pico2018/raw/master/Forensics/8%20-%20Truly%20an%20Artist/2018.png)? You can also find the file in /problems/truly-an-artist_2_61a3ed7216130ab1c2b2872eeda81348.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. Try looking beyond the image. <br>
+    2. Who created this?
+</details>
+
+## Solution
+
+Another image in this category, this time the flag is in the meta-material, and for images its exif data. Any exif tool will do, ive just threw it in an online one:
+
+![arteest](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-artist_1.JPG)
+
+----
+
+# Now You Dont
+
+We heard that there is something hidden in [this picture](https://github.com/bear-sec/pico2018/raw/master/Forensics/9%20-%20now%20you%20dont/nowYouDont.png). Can you find it?
+
+<details>
+  <summary>Hints</summary>
+  
+    1. There is an old saying: if you want to hide the treasure, put it in plain sight. Then no one will see it.<br>
+    2. Is it really all one shade of red?
+</details>
+
+## Solution
+
+From the description and hints we can undestand that we must search for some hidden image, and again with stegsolve, since this will be in the red plane, we search for it in that plane. we see right away that its in the 1 and 0 bit plane. 
+
+![reds](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-dont_2.PNG)
+
+side note, we could solve this by some random color map that inverts some shades to others randomly, and see it, as shown here.
+
+![randoms](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-dont_1.PNG)
+
+----
+
+# Ext Super Magic
+
+We salvaged a ruined [Ext SuperMagic II-class](https://github.com/bear-sec/pico2018/raw/master/Forensics/10%20-%20Ext%20Super%20Magic/ext-super-magic.img) mech recently and pulled the filesystem out of the black box. It looks a bit corrupted, but maybe there's something interesting in there. You can also find it in /problems/ext-super-magic_1_c544657e659accef770d3f2bc8384a8c on the shell server.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. Are there any <a href="https://en.wikipedia.org/wiki/Fsck">tools</a> for diagnosing corrupted filesystems? What do they say if you run them on this one?<br>
+    2. How does a linux machine know what <a href="https://www.garykessler.net/library/file_sigs.html" >type</a> of file a <a href="https://linux.die.net/man/1/file">file</a> is? <br>
+    3. You might find this <a href="http://www.nongnu.org/ext2-doc/ext2.html">doc</a> helpful.<br>
+    4. Be careful with <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when making edits.<br>
+    5. Once you've fixed the corruption, you can use /sbin/<a href="https://linux.die.net/man/8/debugfs">debugfs</a> to pull the flag file out.<br>
+</details>
+
+## Solution
+
+In this challenge we receive a filesystem that is as stated corrupt. First thing is to backup the image file, since they warn us to be careful, we will be responsible and backup the image file.
+Lets check whats corrupt, so we try fsck(or e2fsck for an image file):
+
+![corruption](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_1.JPG)
+
+We see that the magic header is corrupt, so we find where it should be and what it should be
+
+![should_be](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_2.JPG)
+
+Editing the magic value "0xEF53" where it supposed to be with HXD, now we can use debugfs as said in the challenge to browse through the FS.
+
+![deebug](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_3.JPG)
+
+Now we can just dump the flag.
+
+![dump](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_4.JPG)
+
+flag:
+
+![flag:](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_5.JPG)
+
+----
+
+# Lying Out
 
