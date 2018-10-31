@@ -244,7 +244,7 @@ Now we can just dump the flag.
 
 flag:
 
-![flag:](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_5.JPG)
+![flag:](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-ext_5.jpg)
 
 ----
 
