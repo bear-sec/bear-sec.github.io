@@ -125,3 +125,24 @@ and we find a folder of jpg's with some animals, and in this folder a picture of
 
 ----
 
+# Admin Panel
+
+We captured some traffic logging into the admin panel, can you find the password?
+<details>
+  <summary>Hints</summary>
+  
+    1. Tools like wireshark are pretty good for analyzing pcap files.
+</details>
+
+## Solution
+
+Inside the data pcap file, we see http traffic. we see that the first login is for a regular user:
+
+![noob user](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-admin_1.JPG)
+
+and then theres another login with the admin user, and the password is the format of the flags:
+
+![cool user](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-admin_2.JPG)
+
+----
+
