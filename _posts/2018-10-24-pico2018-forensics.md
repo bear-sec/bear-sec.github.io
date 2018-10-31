@@ -330,11 +330,11 @@ first we check where the program crashed. we see thats its at address 0x80487c1,
 
 so we disassemble the function and see what it does.
 
-![it_does](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_3.PNG)
+![it_does](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_3.1.png)
 
 We see that it loads an addresds into eax, and passes it to prints as second parameter, and the formatted string is "`"your flag is: picoCTF{% raw %}{%s}{% endraw %}\n"`", so the address is the flag. We resolve it and get that its at offset 0x14e4 from 0x804a080. which is an address, and not a string. we dereference it and print, and get the flag.
 
-![dereference](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_4.PNG)
+![dereference](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_3.2.png)
 
 ----
 
