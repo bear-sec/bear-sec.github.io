@@ -50,7 +50,7 @@ What does asm0(0xaa,0xf2) return? Submit the flag as a hexadecimal value (starti
 <details>
   <summary>Hints</summary>
   
-    1. basical <a href="https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm">assembly</a> tutorial
+    1. basical <a href="https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm">assembly</a> tutorial<br>
     2. assembly <a href="https://www.tutorialspoint.com/assembly_programming/assembly_registers.htm">registers</a>
 </details>
 
@@ -267,3 +267,76 @@ print hex(asm2(0x4, 0x2d))
 
 ----
 
+# Be Quick or Be Dead 2
+
+As you enjoy [this music](https://www.youtube.com/watch?v=CTt1vk9nM9c) even more, another executable [be-quick-or-be-dead-2](https://github.com/bear-sec/pico2018/raw/master/Reverse%20Engineering/8%20-%20be-quick-or-be-dead-2/be-quick-or-be-dead-2) shows up. Can you run this fast enough too? You can also find the executable in /problems/be-quick-or-be-dead-2_3_bc41c1e2cd88c0e9d8a8d0cb851f91e9.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. Can you call stuff without executing the entire program?<br>
+    2. What will the key finally be?
+</details>
+
+## Solution
+
+In this challenge, similar to the previous one, we get a program that hangs for a bit and is terminated by an alarm.
+Lets disassemble the code and see whats going on.
+As the previous challenge goes, the code flow is the same, except the set_timer, sets the timer for 3 seconds, and the get_key function that we will address soon.
+as with the previous challenge we need to make this function run quicker than it does now, so lets try and understand what it does.
+
+![what_it_does](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/reversing-quick2_1.PNG)
+
+We can see that it calls `fib` with the parameter 0x422(dec1058) and `fib` is the following implementation of fibonacci sequence calculator:
+
+![fibulator](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/reversing-quick2_2.PNG)
+
+so all we need to do is set `cs:key` to be the 1058th fibonacci number. (Note: endianness should be taken into account)
+
+----
+{% comment %}
+# Be Quick or Be Dead 3
+
+As [the song](https://www.youtube.com/watch?v=CTt1vk9nM9c) draws closer to the end, another executable [be-quick-or-be-dead-3](https://github.com/bear-sec/pico2018/raw/master/Reverse%20Engineering/9%20-%20be-quick-or-be-dead-3/be-quick-or-be-dead-3) suddenly pops up. This one requires even faster machines. Can you run it fast enough too? You can also find the executable in /problems/be-quick-or-be-dead-3_0_fa64b8365f5d2ac445b925be0960b943.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. How do you speed up a very repetitive computation?
+</details>
+
+## Solution
+
+I havent actually solved this one yet, so no solution here :(
+
+----
+
+# Quack Me Up
+
+The duck puns continue. Can you crack, I mean quack [this program](https://github.com/bear-sec/pico2018/raw/master/Reverse%20Engineering/10%20-%20quackme%20up/main) as well? You can find the program in /problems/quackme-up_1_6511dc9aa02307b2cc53c5dd9fdfdc75 on the shell server.
+
+No hints for this one
+
+## Solution
+
+I havent actually solved this one yet, so no solution here :(
+
+----
+
+# Radix Terminal
+
+You came across a [custom server](https://github.com/bear-sec/pico2018/raw/master/Reverse%20Engineering/11%20-%20Radix's%20Terminal/radix) that Dr Xernon's company eleCTRic Ltd uses. It seems to be storing some encrypted files. Can you get us the flag? Connect with nc 2018shell1.picoctf.com 36150. Source.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. I have repeated myself many many many times- do not repeat yourself.<br>
+    2. Do I need to say it in different words? You mustn't repeat thyself.
+</details>
+
+## Solution
+
+I havent actually solved this one yet, so no solution here :(
+
+----
+{% endcomment %}
