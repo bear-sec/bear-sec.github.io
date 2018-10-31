@@ -338,4 +338,66 @@ We see that it loads an addresds into eax, and passes it to prints as second par
 
 ----
 
-# ting
+# Malware Shops
+
+There has been some [malware detected](https://github.com/bear-sec/pico2018/raw/master/Forensics/14%20-%20Malware%20Shops/plot.png), can you help with the analysis? [More info](https://github.com/bear-sec/pico2018/raw/master/Forensics/14%20-%20Malware%20Shops/info.txt) here. Connect with nc 2018shell1.picoctf.com 46168.
+
+No hints for this one.
+
+## Solution
+
+we get a plotted data set that resembles the data set we got in "lying out" and an info file that basically states that people that write malware use the same amount of jumps and adds in their code, across different samples from the same actor. so we connect to the port supplied and answer some questions based on the data from the graph and get the flag.
+
+This is the second of two similar challenges that used basically the same graph pattern. These two challenges werent interesting in any way, and required knowing english well, rather than analyzing malware. Thumbs down for these two.. But oh well, points are point.
+
+----
+
+# LoadSomeBits
+
+Can you find the flag encoded inside [this image](https://github.com/bear-sec/pico2018/raw/master/Forensics/15%20-%20LoadSomeBits/pico2018-special-logo.bmp)? You can also find the file in /problems/loadsomebits_3_8933ebe9085168b1e0bbb07884c2231f on the shell server.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. Look through the Least Significant Bits for the image
+    2. If you interpret a binary sequence (seq) as ascii and then try interpreting the same binary sequence from an offset of 1 (seq[1:]) as ascii do you get something similar or completely different?
+</details>
+
+## Solution
+
+in this challenge we get an image with some data hidden in it. as the hints say, its LSB steganography and they said not to just extract and represend as ascii data, rather check if it checks out if we look at the bit sequence from index 1.
+Lets try writing some python code to solve it.
+
+```python
+import struct
+import binascii
+
+a = open(r'C:\Users\Gera\Documents\GitHub\pico2018\Forensics\15 - LoadSomeBits\pico2018-special-logo.bmp',
+         'rb').read()
+data_offset = struct.unpack("<I",a[0xa:0xe])[0] # bitmap offset
+print "bmp data at: ", hex(data_offset)
+for i in range(8): # possible offsets
+    data = a[data_offset+i:data_offset+0x200+i]
+    bits = [ord(x)&1 for x in data]
+    dwords = [''.join([str(y) for y in bits[x*8:x*8+8]]) for x in range(len(bits)/8)]
+    flag = ''.join([chr(int(x,2)) for x in dwords])
+    print "possible flag: " + flag + " at offset: " + str(i)
+```
+
+we see that we get the flag at offset 4, but were missing some data.
+
+![miss](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-lsb_1.png)
+
+Back to the image file in a hex editor, we see that the data starts at offset 0x37, so we set this as the start.
+and maybe sooner, so lets set 0x30.
+
+```python
+data_offset = 0x30
+```
+
+and voila, we get the flag
+
+![](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-lsb_2.png)
+
+----
+
