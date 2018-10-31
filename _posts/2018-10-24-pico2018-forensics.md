@@ -276,7 +276,7 @@ Say my name, [say my name](https://github.com/bear-sec/pico2018/blob/master/Fore
 
 We get a pcap and we need to "say its name". In the hints, we see that we need to translate an IP. so first thing i tried is to extract all of the ips:
 
-![tshark](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/forensics-myname_1.PNG)
+![tshark](https://github.com/bear-sec/bear-sec.github.io/blob/raw/images/forensics-myname_1.PNG)
 
 Now run a dns query for each one, done with python, to see maybe the dns name is the flag. 
 
@@ -295,11 +295,11 @@ for ip in ips:
 
 this didt reveal any obvious solution:
 
-![not_obvious](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/forensics-myname_2.PNG)
+![not_obvious](https://github.com/bear-sec/bear-sec.github.io/blob/raw/images/forensics-myname_2.PNG)
 
 I figured I need to check the pcap by hand, and as easy as that, filtering by DNS, revealed the answer. 
 
-![by_hand](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/forensics-myname_3.PNG)
+![by_hand](https://github.com/bear-sec/bear-sec.github.io/blob/raw/images/forensics-myname_3.PNG)
 
 ---
 
@@ -401,3 +401,4 @@ and voila, we get the flag
 
 ----
 
+This wraps up forensics category of pico2018. There were a couple of pretty fun challenges to solve, and some, not so much. This category was pretty easy, and was a total bonus points moterload!
