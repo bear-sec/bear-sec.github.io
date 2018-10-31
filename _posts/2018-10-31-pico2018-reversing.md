@@ -21,7 +21,7 @@ Throughout your journey you will have to run many programs. Can you navigate to 
 
 Just running the program gives out the flag.
 
-![run_forest](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/reversing-warmup_1.JPG)
+![run_forest](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/reversing-warmup_1.JPG)
 
 ----
 
@@ -39,7 +39,7 @@ Can you decode the following string dGg0dF93NHNfczFtcEwz from base64 format to A
 
 Converting it gives the flag:
 
-![convertte](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/reversing-warmup_2.JPG)
+![convertte](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/reverseing-warmup_2.JPG)
 
 ----
 
