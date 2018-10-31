@@ -250,3 +250,88 @@ flag:
 
 # Lying Out
 
+Some [odd traffic](https://github.com/bear-sec/pico2018/raw/master/Forensics/11%20-%20Lying%20Out/traffic.png) has been detected on the network, can you identify it? More info here. Connect with nc 2018shell1.picoctf.com 27108 to help us answer some questions.
+
+No hints for this one.
+
+## Solution
+
+We get a picture of some traffic graph that we need to answer some question based upon. as we connect to the port, we receive some questions based on the data supplied, answering them correctly gets the flag. 
+
+![question](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-lying_1.PNG)
+
+----
+
+# Whats My Name
+
+Say my name, [say my name](https://github.com/bear-sec/pico2018/blob/master/Forensics/12%20%20-%20Whats%20My%20Name/myname.pcap?raw=true).
+
+<details>
+  <summary>Hints</summary>
+  
+    1. If you visited a website at an IP address, how does it know the name of the domain?
+</details>
+
+## Solution
+
+We get a pcap and we need to "say its name". In the hints, we see that we need to translate an IP. so first thing i tried is to extract all of the ips:
+
+![tshark](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/forensics-myname_1.PNG)
+
+Now run a dns query for each one, done with python, to see maybe the dns name is the flag. 
+
+```python
+import socket
+
+ips = open(r'C:\Users\Gera\Documents\GitHub\pico2018\Forensics\12  - Whats My Name\ips2.txt',
+           'r').readlines()
+for ip in ips:
+    try:
+        print socket.gethostbyaddr(ip.strip())
+    except:
+        print ip.strip(), 'not found'
+
+```
+
+this didt reveal any obvious solution:
+
+![not_obvious](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/forensics-myname_2.PNG)
+
+I figured I need to check the pcap by hand, and as easy as that, filtering by DNS, revealed the answer. 
+
+![by_hand](https://github.com/bear-sec/bear-sec.github.io/blob/master/images/forensics-myname_3.PNG)
+
+---
+
+# Core
+
+[This program](https://github.com/bear-sec/pico2018/blob/master/Forensics/13%20-%20core/print_flag?raw=true) was about to print the flag when it died. Maybe the flag is still in [this core](https://github.com/bear-sec/pico2018/blob/master/Forensics/13%20-%20core/core?raw=true) file that it dumped? Also available at /problems/core_0_28700fe29cea151d6a3350f244f342b2 on the shell server.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. What is a core file?
+    2. You may find <a href="https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf">this</a> reference helpful.
+    3. Try to figure out where the flag was read into memory using the disassembly and <a href="https://linux.die.net/man/1/strace">strace</a>.
+    4. You should study the format options on the cheat sheet and use the examine (x) or print (p) commands. disas may also be useful.
+</details>
+
+## Solution
+
+we get a program and its core dumped as it says "...was about to print the flag..." so we know we need to somehow analyze the program and the coredump. we will use gdb for that. 
+First thing we need to see how to work with coredumps in gdb.
+
+![cores](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_1.PNG)
+
+So we dump the files into our linux machine and begin the analysis.
+first we check where the program crashed. we see thats its at address 0x80487c1, which is beginnig of print_flag function.
+
+![beginning](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_2.PNG)
+
+so we disassemble the function and see what it does.
+
+![it_does](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_3.PNG)
+
+We see that it loads an addresds into eax, and passes it to prints as second parameter, and the formatted string is "`"your flag is: picoCTF{%s}\n"`", so the address is the flag. We resolve it and get that its at offset 0x14e4 from 0x804a080. which is an address, and not a string. we dereference it and print, and get the flag.
+
+![dereference](https://github.com/bear-sec/bear-sec.github.io/raw/master/images/forensics-core_4.PNG)
