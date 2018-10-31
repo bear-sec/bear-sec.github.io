@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PicoCTF 2018 - Forensics
+title: PicoCTF 2018 - Reversing
 ---
 
 This post will be focusing on the "Reversing" challenges presented in picoCTF. These challenges are mainly all sorts of crack-me's or just understanding the program in assembly.
