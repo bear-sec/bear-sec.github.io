@@ -43,3 +43,38 @@ Converting it gives the flag:
 
 ----
 
+# Assembly-0
+
+What does asm0(0xaa,0xf2) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/assembly-0_2_485b2d48345b19addbeb06a36aabdc74.
+
+<details>
+  <summary>Hints</summary>
+  
+    1. basical <a href="https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm">assembly</a> tutorial
+    2. assembly <a href="https://www.tutorialspoint.com/assembly_programming/assembly_registers.htm">registers</a>
+</details>
+
+## Solution
+
+Following the assembly and the arguments passed specified in the question:
+
+```assembly
+.intel_syntax noprefix
+.bits 32
+	
+.global asm0
+
+asm0:
+	push	ebp
+	mov	ebp,esp
+	mov	eax,DWORD PTR [ebp+0x8] ; first param (0xaa)
+	mov	ebx,DWORD PTR [ebp+0xc] ; second param (0xf2)
+	mov	eax,ebx ; eax has 0xf2
+	mov	esp,ebp
+	pop	ebp	
+	ret
+	
+asm0(0xaa, 0xf2) = 0xf2
+```
+
+----
